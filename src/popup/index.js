@@ -1,18 +1,15 @@
 import React, { Fragment } from 'react'
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Login from './pages/login'
 import './popup.styl'
 // 本地调试 content script 时开启
 // import '@/content'
 function Popup() {
     return (
         <Fragment>
-            <HashRouter>
-                <Switch>
-                    <Route path="/login" component={Login} />
-                    <Redirect to={'/login'} />
-                </Switch>
-            </HashRouter>
+            <div className="FF-header">chrome插件demo</div>
+			<div className='FF-main'>
+				<p>基于react+antd框架</p>
+				<p>ffbot转写文本意图</p>
+			</div>
         </Fragment>
     )
 }
