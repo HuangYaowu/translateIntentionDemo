@@ -14,6 +14,7 @@ function MainModal(props) {
     const { onClose } = props
     // 监听父组件传递的数据
     useEffect(() => {
+        setUserContent(props.rangeContent)
     }, [props.rangeContent]);
 
     useEffect(() => {
