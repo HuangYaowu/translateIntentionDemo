@@ -1,7 +1,27 @@
 window.onload = () => {
   // onselectionchange
   document.onmouseup = (event) => {
-    handleSelection(event, null)
+    filterClickDom(event)
+  }
+
+  // 处理点击插件本身的情况
+  function filterClickDom(event) {
+    const node = event.target
+    const result = getParent(node)
+    function getParent(node) {
+      const idName = node.id
+      if (idName) {
+        if (idName.indexOf('CRX-container') !== -1) {
+          return true
+        }
+      }
+      if (node.parentNode) {
+        return getParent(node.parentNode)
+      }
+    }
+    if (!result) {
+      handleSelection(event, null)
+    }
   }
 
   // 处理网页中嵌套iframe的情况

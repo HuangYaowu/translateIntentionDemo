@@ -14,8 +14,6 @@ function Content() {
     const [pageMouseInfo, setPageMouseInfo] = useState({})
     // 最终的坐标信息
     const [finalCoordinate, setFinalCoordinate] = useState({ x: 0, y: 0})
-    // const finalRef = useRef(finalCoordinate)
-    // finalRef.current = finalCoordinate
 
     function handleMessage(request, sender, sendResponse) {
         // 每次监听完要销毁
