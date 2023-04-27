@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import MainModal from './components/mainModal'
 import './content.styl'
@@ -56,7 +56,7 @@ function Content() {
             // 如果超过边界值，则位置为最大边界值
             let finalX = 0
             let finalY = 0
-            if (diffWidth == x) {
+            if (diffWidth === x) {
                 finalX = maxWidth
             } else {
                 const calcWt = x + iconDomWt
@@ -67,7 +67,7 @@ function Content() {
                 }
             }
             // 如果超过边界值，则位置为最大边界值
-            if (diffHeight == y) {
+            if (diffHeight === y) {
                 finalY = maxHeight
             } else {
                 const calcHt = y + iconDomHt
@@ -84,6 +84,7 @@ function Content() {
         }
         console.warn('监听icon容器', contentEntry)
     }, [rangeContent])
+
     return (
         <div className="CRX-content">
             {iconVisible ? (

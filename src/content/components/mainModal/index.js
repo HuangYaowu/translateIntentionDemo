@@ -9,14 +9,11 @@ function MainModal(props) {
     const [userContent, setUserContent] = useState('')
     // 将来接口要返回的文本意图
     const [userIntention, setUserIntention] = useState('')
-    // 页面鼠标坐标信息
-    const [pageMouseInfo, setPageMouseInfo] = useState(props.pageMouseInfo)
 
     // 接收父组件传递过来的数据方法
     const { onClose } = props
     // 监听父组件传递的数据
     useEffect(() => {
-        setUserContent(props.rangeContent);
     }, [props.rangeContent]);
 
     useEffect(() => {
@@ -26,27 +23,24 @@ function MainModal(props) {
             // 容器的宽高
             const chromeConWdith = chromeContainer.clientWidth
             const chromeConHeight = chromeContainer.clientHeight
-
+            // 页面鼠标坐标信息
             const { documentWidth, documentHeight } = props.pageMouseInfo
             // 最大文档宽高
             const maxWidth = documentWidth - chromeConWdith
             const maxHeight = documentHeight - chromeConHeight
-            console.warn('max 000', maxWidth, maxHeight)
             // 计算是否超出边界
             const finalX = props.finalCoordinate.x || 0
             const finalY = props.finalCoordinate.y || 0
-            console.warn('final 111', finalX, finalY)
             const diffWidth = Math.max(maxWidth, finalX)
             const diffHeight = Math.max(maxHeight, finalY)
-            console.warn('diff 222', diffWidth, diffHeight)
             // 超出边界处理
-            if (diffWidth == finalX) {
+            if (diffWidth === finalX) {
                 chromeContainer.style.left = maxWidth + 'px'
             } else {
                 chromeContainer.style.left = finalX + 'px'
             }
 
-            if (diffHeight == finalY) {
+            if (diffHeight === finalY) {
                 chromeContainer.style.top = maxHeight + 'px'
             } else {
                 chromeContainer.style.top = finalY + 'px'
