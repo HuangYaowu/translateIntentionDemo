@@ -39,7 +39,7 @@ function Content() {
 
     // 选中的文本内容发生变化
     useEffect(() => {
-        const CRXcontent = document.querySelector('.CRX-content')
+        const CRXcontent = document.querySelector('.FF-content')
         const contentEntry = CRXcontent.querySelector('.content-entry')
         if (contentEntry) {
             // 图标的高宽
@@ -86,7 +86,7 @@ function Content() {
     }, [rangeContent])
 
     return (
-        <div className="CRX-content">
+        <div className="FF-content">
             {iconVisible ? (
                 <div
                     className="content-entry"
@@ -109,7 +109,7 @@ function Content() {
 }
 
 const app = document.createElement('div')
-app.id = 'CRX-container'
+app.id = 'FF-container'
 document.body.appendChild(app)
 
 ReactDOM.render(<Content />, app)

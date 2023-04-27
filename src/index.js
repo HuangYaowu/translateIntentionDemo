@@ -12,5 +12,5 @@ ReactDOM.render(
     <ConfigProvider {...antdConfig}>
       <Popup />
     </ConfigProvider>,
-  document.getElementById('root')
+  document.getElementById('FF-root')
 )

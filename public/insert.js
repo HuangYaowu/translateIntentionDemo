@@ -11,7 +11,7 @@ window.onload = () => {
     function getParent(node) {
       const idName = node.id
       if (idName) {
-        if (idName.indexOf('CRX-container') !== -1) {
+        if (idName.indexOf('FF-container') !== -1) {
           return true
         }
       }
@@ -177,6 +177,7 @@ window.onload = () => {
           rangeContent,
           pageMouseInfo
       }
+      console.log('window.chrome.runtime', window.chrome.runtime)
       window.chrome.runtime.sendMessage(params)
     }
   }

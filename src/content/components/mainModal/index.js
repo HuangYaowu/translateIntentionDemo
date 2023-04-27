@@ -17,12 +17,12 @@ function MainModal(props) {
     }, [props.rangeContent]);
 
     useEffect(() => {
-        const chromeContainer = document.querySelector('.chrome-container')
-        console.warn('chromeContainer', chromeContainer)
-        if (chromeContainer) {
+        const ffContainer = document.querySelector('.FF-container')
+        console.warn('ffContainer', ffContainer)
+        if (ffContainer) {
             // 容器的宽高
-            const chromeConWdith = chromeContainer.clientWidth
-            const chromeConHeight = chromeContainer.clientHeight
+            const chromeConWdith = ffContainer.clientWidth
+            const chromeConHeight = ffContainer.clientHeight
             // 页面鼠标坐标信息
             const { documentWidth, documentHeight } = props.pageMouseInfo
             // 最大文档宽高
@@ -35,15 +35,15 @@ function MainModal(props) {
             const diffHeight = Math.max(maxHeight, finalY)
             // 超出边界处理
             if (diffWidth === finalX) {
-                chromeContainer.style.left = maxWidth + 'px'
+                ffContainer.style.left = maxWidth + 'px'
             } else {
-                chromeContainer.style.left = finalX + 'px'
+                ffContainer.style.left = finalX + 'px'
             }
 
             if (diffHeight === finalY) {
-                chromeContainer.style.top = maxHeight + 'px'
+                ffContainer.style.top = maxHeight + 'px'
             } else {
-                chromeContainer.style.top = finalY + 'px'
+                ffContainer.style.top = finalY + 'px'
             }
         }
     }, [props.finalCoordinate]);
@@ -78,7 +78,7 @@ function MainModal(props) {
     }
 
     return (
-        <div className="chrome-container">
+        <div className="FF-container">
             <div className="header">
                 <span>获取文本意图</span>
                 <span className='close-btn' onClick={onClose}>x</span>
