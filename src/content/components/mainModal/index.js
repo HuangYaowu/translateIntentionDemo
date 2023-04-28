@@ -92,6 +92,7 @@ function MainModal(props) {
                             className='ff-textarea'
                             value={userContent}
                             placeholder="请输入文本内容"
+                            autoSize={{ minRows: 3, maxRows: 3 }}
                             onChange={handleUserContent}
                         />
                     </div>
@@ -100,6 +101,7 @@ function MainModal(props) {
                         <TextArea
                             className='ff-textarea'
                             value={userIntention}
+                            autoSize={{ minRows: 3, maxRows: 3 }}
                             placeholder="这是文本内容返回用户意图"
                             onChange={handleUserIntention}
                         />
