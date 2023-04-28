@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Input }  from 'antd'
+import { ReactComponent as CloseOutlined } from './close.svg'
 import './mainModal.styl'
 import { apiReqs } from '@/api'
 const { TextArea } = Input
@@ -18,8 +19,7 @@ function MainModal(props) {
     }, [props.rangeContent]);
 
     useEffect(() => {
-        const ffContainer = document.querySelector('.FF-container')
-        console.warn('ffContainer', ffContainer)
+        const ffContainer = document.querySelector('.FF-content-modal')
         if (ffContainer) {
             // 容器的宽高
             const chromeConWdith = ffContainer.clientWidth
@@ -79,30 +79,42 @@ function MainModal(props) {
     }
 
     return (
-        <div className="FF-container">
+        <div className="FF-content-modal">
             <div className="header">
                 <span>获取文本意图</span>
-                <span className='close-btn' onClick={onClose}>x</span>
+                <CloseOutlined className='close-btn' onClick={onClose} />
             </div>
             <div className="main">
                 <div className="form">
-                    <span>内容：</span>
-                    <Input
-                        type="text"
-                        value={userContent}
-                        placeholder="请输入内容"
-                        onChange={handleUserContent}
-                    />
+                    <div className="form-item">
+                        <span className="label">文本内容：</span>
+                        <TextArea
+                            className='ff-textarea'
+                            value={userContent}
+                            placeholder="请输入文本内容"
+                            onChange={handleUserContent}
+                        />
+                    </div>
+                    <div className="form-item">
+                        <span className="label">文本意图：</span>
+                        <TextArea
+                            className='ff-textarea'
+                            value={userIntention}
+                            placeholder="这是文本内容返回用户意图"
+                            onChange={handleUserIntention}
+                        />
+                    </div>
                 </div>
-                <Button type="primary" className="send-btn" onClick={sendContent}>发送</Button>
-                <div className="separate">下面是返回的意图展示</div>
-                <TextArea
-                    className='textarea'
-                    value={userIntention}
-                    readOnly
-                    placeholder="返回用户意图"
-                    onChange={handleUserIntention}
-                />
+                <div className="send-btn-wrap">
+                    <Button
+                        type="primary"
+                        value="small"
+                        className="send-btn"
+                        onClick={sendContent}
+                    >
+                        发送
+                    </Button>
+                </div>
             </div>
         </div>
     )

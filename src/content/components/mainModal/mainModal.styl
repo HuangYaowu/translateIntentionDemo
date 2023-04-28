@@ -1,37 +1,45 @@
-.FF-container
+.FF-content-modal
     position fixed
-    width: 300px
+    width: 360px
     height: max-content
     top: 0
     left: 0
-    border: 1px solid #ccc
     background: #fff
-    overflow-x: hidden
     overflow-y: auto
+    overflow-x: hidden
+    border-radius: 6px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+    user-select: none
     z-index: 99999
     .header
         display: flex
         justify-content: space-between;
         align-items: center
-        height: 30px
+        height: 36px
         padding: 0 10px;
         border-bottom: 1px solid #ccc
         .close-btn
             cursor: pointer
     .main
         display: block
-        padding: 5px
+        padding: 10px
         .form
-            display: flex
-            align-items: center
-            span
-                flex: 0 0 42px
-        .send-btn
+            .form-item
+                width: 100%
+                display: flex
+                align-items: flex-start
+                margin-bottom: 12px
+                .label
+                    flex: 0 0 70px
+                .ff-textarea
+                    position: static
+                    resize: none
+                    font-size: 12px
+                    border: 1px solid #ccc
+        .send-btn-wrap
             width: 100%
             margin-top: 5px
-        .separate
-            margin: 10px 0 5px
-        .textarea
-            position: static
-            height: 100px
-            resize: none
+            .send-btn
+                width: 100%
+                box-sizing: border-box
+        
