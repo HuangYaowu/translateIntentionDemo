@@ -56,7 +56,6 @@ if (chrome.runtime) {
         console.log('background 的 onMessage', request);
         // 接收web页面发送过来的信息
         if (request.from === 'web') {
-            console.log('background收到的数据', request)
             // 通过tabid，发送到指定content script
             getCurrentTabId(tabId => {
                 chrome.tabs.sendMessage(tabId, {
@@ -69,4 +68,5 @@ if (chrome.runtime) {
         return true
     })
 }
+
 

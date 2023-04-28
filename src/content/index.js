@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import MainModal from './components/mainModal'
 import './content.styl'
-
+// 控制监听始终只有一个
+let count = 0
 function Content() {
     // 控制图标的显隐
     const [iconVisible, setIconVisible] = useState(false)
@@ -16,10 +17,10 @@ function Content() {
     const [finalCoordinate, setFinalCoordinate] = useState({ x: 0, y: 0})
 
     function handleMessage(request, sender, sendResponse) {
-        // 每次监听完要销毁
-        if (window.chrome.runtime) {
-            window.chrome.runtime.onMessage.removeListener(handleMessage)
-        }
+        // TODO 每次监听完要销毁,不能销毁，导致下次无法触发，使用count控制
+        // if (window.chrome.runtime) {
+        //     window.chrome.runtime.onMessage.removeListener(handleMessage)
+        // }
         // 接收来自background模块的内容
         if (request.from === 'background' && request.rangeContent) {
             console.warn('content模块收到信息', request)
@@ -33,7 +34,9 @@ function Content() {
         }
         return true
     }
-    if (window.chrome.runtime) {
+    // TODO 每次更新state中的值会触发多次组件更新，导致出现多个监听，重复操作会导致页面的卡死
+    if (window.chrome.runtime && !count) {
+        count += 1
         window.chrome.runtime.onMessage.addListener(handleMessage)
     }
 
