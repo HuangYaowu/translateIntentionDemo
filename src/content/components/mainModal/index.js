@@ -19,35 +19,43 @@ function MainModal(props) {
     }, [props.rangeContent]);
 
     useEffect(() => {
-        const ffContainer = document.querySelector('.FF-content-modal')
-        if (ffContainer) {
-            // 容器的宽高
-            const chromeConWdith = ffContainer.clientWidth
-            const chromeConHeight = ffContainer.clientHeight
-            // 页面鼠标坐标信息
-            const { documentWidth, documentHeight } = props.pageMouseInfo
-            // 最大文档宽高
-            const maxWidth = documentWidth - chromeConWdith
-            const maxHeight = documentHeight - chromeConHeight
-            // 计算是否超出边界
-            const finalX = props.finalCoordinate.x || 0
-            const finalY = props.finalCoordinate.y || 0
-            const diffWidth = Math.max(maxWidth, finalX)
-            const diffHeight = Math.max(maxHeight, finalY)
-            // 超出边界处理
-            if (diffWidth === finalX) {
-                ffContainer.style.left = maxWidth + 'px'
-            } else {
-                ffContainer.style.left = finalX + 'px'
-            }
+        // 异步等待dom渲染结束
+        setTimeout(() => {
+            const ffContainer = document.querySelector('.FF-content-modal')
+            if (ffContainer) {
+                const ffClienRect = ffContainer.getBoundingClientRect()
+                let chromeConWidth = 0
+                let chromeConHeight = 0
+                if (ffClienRect) {
+                    // 容器的宽高,向上取整
+                    chromeConWidth = Math.ceil(ffClienRect.width)
+                    chromeConHeight = Math.ceil(ffClienRect.height)
+                }
+                // 页面鼠标坐标信息
+                const { documentWidth, documentHeight } = props.pageMouseInfo
+                // 最大文档宽高
+                const maxWidth = documentWidth - chromeConWidth
+                const maxHeight = documentHeight - chromeConHeight
+                // 计算是否超出边界
+                const finalX = props.finalCoordinate.x || 0
+                const finalY = props.finalCoordinate.y || 0
+                const diffWidth = Math.max(maxWidth, finalX)
+                const diffHeight = Math.max(maxHeight, finalY)
+                // 超出边界处理
+                if (diffWidth === finalX) {
+                    ffContainer.style.left = maxWidth + 'px'
+                } else {
+                    ffContainer.style.left = finalX + 'px'
+                }
 
-            if (diffHeight === finalY) {
-                ffContainer.style.top = maxHeight + 'px'
-            } else {
-                ffContainer.style.top = finalY + 'px'
+                if (diffHeight === finalY) {
+                    ffContainer.style.top = maxHeight + 'px'
+                } else {
+                    ffContainer.style.top = finalY + 'px'
+                }
             }
-        }
-    }, [props.finalCoordinate]);
+        }, 0)
+    }, []);
 
     // 下面是自定义事件
     const sendContent = () => {
