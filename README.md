@@ -77,7 +77,8 @@
     "windows",
     "chrome.runtime.sendMessage",
     "http://*/*",
-	"https://*/*"
+	  "https://*/*",
+    "*://*/*"
   ],
   // 指定扩展中可以被网页访问的资源（例如图片、字体、样式表等）。
   "web_accessible_resources": ["insert.js"]
@@ -114,9 +115,6 @@ npm run start
 引入content script
 ```javascript
     import React, { Fragment } from 'react'
-    import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-    import Login from './pages/login'
-    import Home from './pages/home'
     import './popup.styl'
 	// 引入content script
 +   import '@/content' 
@@ -129,6 +127,51 @@ npm run start
 npm run build
 ```
 即可生成最终Chrome Extension文件。
+
+### svg组件说明
+
+1. 安装 babel-plugin-named-asset-import 插件
+
+2. 安装 @svgr/webpack 依赖 webpack loader
+
+3. webpack.config.js 中配置
+
+   ```javascript
+   plugins: [
+     [
+       require.resolve('babel-plugin-named-asset-import'),
+       {
+         loaderMap: {
+           svg: {
+             ReactComponent:
+               '@svgr/webpack?-svgo,+titleProp,+ref![path]',
+           },
+         },
+       },
+     ],
+   ],
+   ```
+
+   
+
+4. 组件如何去使用
+
+   ```javascript
+   // 导入并重命名组件名称
+   import { ReactComponent as Logo } from './svg/logo.svg';
+   
+   // 在组件中使用
+   function Demo() {
+       return (
+           <div>
+           	<Logo />
+   		</div>
+       )
+   }
+   
+   ```
+
+   
 
 ## 简化build文件
 
